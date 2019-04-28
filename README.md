@@ -1,6 +1,14 @@
 ## Amazon EC2 MSSQL Workshop
 
-workshop for building mssql always on basic availability group on window and Linux. Build Amazon FSx for managed shared file service, AWS Directory services for Identity management and Amazon EC2 to create a Well-Architected Microsoft SQL solution.
+Workshop for building mssql always on basic availability group on window and Linux server in AWS
+
+## Summary of the workshop
+
+In this workshop you will use Amazon FSx for managed shared file service, AWS Directory services for Identity management and Amazon EC2 to create a Well-Architected Microsoft SQL Server solution. 
+The workshop also includes ways to achieve better performance from the storage layer, ways to automate this process and cover options to refactor and modernize your Microsoft database with Amazon DMS and Amazon SCT to another MySQL engine or Linux host server.
+
+![image](https://github.com/aws-samples/amazon-ec2-mssql-workshop/blob/master/content/img/Architecture/mssql-draw-workshop-Page-1.png)
+
 
 ## Building the Workshop site
 
@@ -20,6 +28,7 @@ popd
 ```bash
 hugo serve -D
 ```
+
 
 ## License Summary
 
