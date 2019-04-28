@@ -1,0 +1,38 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'FSx: new FSx'
+Parameters:
+  Name:
+    Type: String
+  VpcID:
+    Type: String
+  SubnetC:
+    Type: String
+  SecurityGroup:
+    Type: String
+  DirectoryID:
+    Type: String
+Resources:
+  WindowsFileSystemWithAllConfigs:
+    Type: "AWS::FSx::FileSystem"
+    Properties:
+      FileSystemType: "WINDOWS"
+      StorageCapacity: 500
+      SubnetIds: 
+        - !Ref SubnetC
+      SecurityGroupIds: 
+       - !Ref SecurityGroup
+      Tags:
+        - Key: "Name"
+          Value: !Ref Name
+        - Key: "ThroughputCapacity"
+          Value: "16"
+      WindowsConfiguration:
+        ActiveDirectoryId: !Ref DirectoryID
+        ThroughputCapacity: 8
+        WeeklyMaintenanceStartTime: "4:16:30"
+        DailyAutomaticBackupStartTime: "01:00"
+        AutomaticBackupRetentionDays: 2
+        CopyTagsToBackups: false
+Outputs:
+  FileSystemId:
+    Value: !Ref WindowsFileSystemWithAllConfigs

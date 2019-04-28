@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Create EC2 Instance with Microsoft SQL Server Pre-Installed on My New Hugo Site</title>
+    <link>http://example.org/launch-ec2-with-mssql/</link>
+    <description>Recent content in Create EC2 Instance with Microsoft SQL Server Pre-Installed on My New Hugo Site</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 21 Mar 2019 20:40:20 +0200</lastBuildDate>
+    
+	<atom:link href="http://example.org/launch-ec2-with-mssql/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Build HA</title>
+      <link>http://example.org/launch-ec2-with-mssql/build-ha/</link>
+      <pubDate>Thu, 21 Mar 2019 20:40:20 +0200</pubDate>
+      
+      <guid>http://example.org/launch-ec2-with-mssql/build-ha/</guid>
+      <description>Build HA Failover Cluster Manager 1. 1.Create Cluster and add the two nodes by their IP 2. Access point: DB 3. Uncheck the &amp;quot;Add all eligible storage to the cluster&amp;quot; 4. Open the FailOver Cluster Manager and fix the network settings: 1. a.Cluster Core Resources: 2. b.Edit the first ip: To 10.0.1.12 Click ok.
+Enable Always-on 1. 1.Open SQL Server Configuration Manager and enable the Always on checkbox 1. 2.</description>
+    </item>
+    
+    <item>
+      <title>Configure the instances with SSM</title>
+      <link>http://example.org/launch-ec2-with-mssql/configure-the-instances-with-ssm/</link>
+      <pubDate>Thu, 21 Mar 2019 20:40:20 +0200</pubDate>
+      
+      <guid>http://example.org/launch-ec2-with-mssql/configure-the-instances-with-ssm/</guid>
+      <description>Configure the instances with SSM In this step you will add permission the account domain user to manage your db and open firewall rules
+ Step1: Use the following script  # Gets Instance ids and list of commands and returns the output param ( [string]$region = &amp;quot;eu-west-1&amp;quot;, [Parameter(Mandatory=$true)][string[]]$instanceids, [Parameter(Mandatory=$true)][string[]]$commands ) Write-Output &amp;quot;Creating the document on&amp;quot; $instanceids $runPSCommand= Send-SSMCommand -InstanceId $instanceids -DocumentName AWS-RunPowerShellScript -Comment &#39;Script to run powershell commands&#39; -Parameter @{commands = $commands} -region $region sleep(1) foreach ($instanceid in $instanceids) { Write-Output &amp;quot;------------------------------------&amp;quot; Write-Output &amp;quot;Working on: $instanceid&amp;quot; Write-output &amp;quot;`n *****Output from the instance:***** `n&amp;quot; $status = Get-SSMCommandInvocation -CommandId $runPSCommand.</description>
+    </item>
+    
+    <item>
+      <title>Test the HA:</title>
+      <link>http://example.org/launch-ec2-with-mssql/test-ha/</link>
+      <pubDate>Thu, 21 Mar 2019 20:40:20 +0200</pubDate>
+      
+      <guid>http://example.org/launch-ec2-with-mssql/test-ha/</guid>
+      <description> Test the HA:  Fine tuning:
+ Open dnsmgmt.msc
+ Look for the endpoint record, do you see two?
+ Solution:
+ 1.Get-ClusterResource &amp;amp;lt;NetworkName&amp;amp;gt; | Set-ClusterParameter RegisterAllProvidersIP 0
+  </description>
+    </item>
+    
+  </channel>
+</rss>

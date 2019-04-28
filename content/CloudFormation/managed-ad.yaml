@@ -1,0 +1,38 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'MAD: new MAD'
+Parameters:
+  Name:
+    Type: String
+    Default: directory.aws
+  Password:
+    Type: String
+    Default: 'HNxZUH3nwk2DdGGC'
+  ShortName:
+    Type: String
+    Default: directory
+  VpcID:
+    Type: String
+  SubnetA:
+    Type: String
+  SubnetB:
+    Type: String
+Resources:
+  myDirectory: 
+    Type: AWS::DirectoryService::MicrosoftAD
+    Properties: 
+      Name: !Ref Name
+      Password: !Ref Password
+      ShortName: !Ref ShortName
+      Edition: Standard
+      VpcSettings: 
+        SubnetIds: 
+          - !Ref SubnetA
+          - !Ref SubnetB
+        VpcId: 
+          !Ref VpcID
+Outputs:
+  myDirectory:
+    Description: 'Directory id'
+    Value: !Ref myDirectory
+    Export:
+      Name: !Sub '${AWS::StackName}-DID'

@@ -1,0 +1,78 @@
+[
+{
+	"uri": "http://example.org/launch-ec2-with-mssql/build-ha/",
+	"title": "Build HA",
+	"tags": [],
+	"description": "",
+	"content": " Build HA Failover Cluster Manager 1. 1.Create Cluster and add the two nodes by their IP 2. Access point: DB 3. Uncheck the \u0026quot;Add all eligible storage to the cluster\u0026quot; 4. Open the FailOver Cluster Manager and fix the network settings: 1. a.Cluster Core Resources: 2. b.Edit the first ip: To 10.0.1.12 Click ok.\nEnable Always-on 1. 1.Open SQL Server Configuration Manager and enable the Always on checkbox 1. 2.Add to the computer account DB (The one that belongs to the Always on object) permissions to add computer accounts (Via dsa.msc, view-advanced, right click and permissions  Create Database called \u0026quot;Database\u0026quot; and do a full backup of this database (right click Tasks-\u0026amp;gt;Backup) 2. 4.Open SSMS and create the first Availability group: 3. 5.Add the second Instance:  Go to Listener and set both of the IP: 5. 7.For Data Sync use the FSx or Shared folder of one of the instances: Result:  Result: Done.\nFix the network settings on the failover cluster:  Advanced policies and allow only one node per his IP  "
+},
+{
+	"uri": "http://example.org/prerequisites/",
+	"title": "Prerequisites",
+	"tags": [],
+	"description": "",
+	"content": ""
+},
+{
+	"uri": "http://example.org/prerequisites/vpc-details/",
+	"title": "VPC Details",
+	"tags": [],
+	"description": "",
+	"content": " Prerequisites VPC: SQL-POC Subnet: 10.0.0.0 / 16\nSite1 subnet: 10.0.1.0/24 – eu-west-1a\nSite2 subnet: 10.0.2.0/24 – eu-west-1b\n"
+},
+{
+	"uri": "http://example.org/",
+	"title": "Welcome screen",
+	"tags": [],
+	"description": "",
+	"content": " Chapter 1 Welcome screen Lorem Ipsum.\n"
+},
+{
+	"uri": "http://example.org/launch-ec2-with-mssql/configure-the-instances-with-ssm/",
+	"title": "Configure the instances with SSM",
+	"tags": [],
+	"description": "",
+	"content": " Configure the instances with SSM In this step you will add permission the account domain user to manage your db and open firewall rules\n Step1: Use the following script  # Gets Instance ids and list of commands and returns the output param ( [string]$region = \u0026quot;eu-west-1\u0026quot;, [Parameter(Mandatory=$true)][string[]]$instanceids, [Parameter(Mandatory=$true)][string[]]$commands ) Write-Output \u0026quot;Creating the document on\u0026quot; $instanceids $runPSCommand= Send-SSMCommand -InstanceId $instanceids -DocumentName AWS-RunPowerShellScript -Comment 'Script to run powershell commands' -Parameter @{commands = $commands} -region $region sleep(1) foreach ($instanceid in $instanceids) { Write-Output \u0026quot;------------------------------------\u0026quot; Write-Output \u0026quot;Working on: $instanceid\u0026quot; Write-output \u0026quot;`n *****Output from the instance:***** `n\u0026quot; $status = Get-SSMCommandInvocation -CommandId $runPSCommand.CommandId -Details $true -InstanceId $instanceid -region $region | select -ExpandProperty CommandPlugins | select Status while ($status.Status -eq 'InProgress') { sleep(1) $status = Get-SSMCommandInvocation -CommandId $runPSCommand.CommandId -Details $true -InstanceId $instanceid -region $region | select -ExpandProperty CommandPlugins | select Status } Get-SSMCommandInvocation -CommandId $runPSCommand.CommandId -Details $true -InstanceId $instanceid -region $region | select -ExpandProperty CommandPlugins | select -ExpandProperty Output Write-output \u0026quot;`n *****End of output from the instance***** `n\u0026quot; } Write-Output \u0026quot;------------------------------------\u0026quot; Write-Output \u0026quot;Done\u0026quot;   Run the following:  ./Script.ps -$instanceids -commands – \u0026quot;Install-WindowsFeature -Name Failover-Clustering –IncludeManagementTools,ADD-WindowsFeature RSAT-AD-Tools,ADD-WindowsFeature RSAT-DNS-Tools\u0026quot;   Now, Connect with RDP with the local Administrator, open SSMS, and add the domain admin to sysadmin role.  Disconnect, and Connect with RDP and the user domain\\admin that you created previously with Managed AD. *Make sure that you have permissions to launch SSMS.  "
+},
+{
+	"uri": "http://example.org/launch-ec2-with-mssql/",
+	"title": "Create EC2 Instance with Microsoft SQL Server Pre-Installed",
+	"tags": [],
+	"description": "",
+	"content": " Create EC2 Instance with Microsoft SQL Server Pre-Installed  In this task, you will create a Microsoft Windows Server 2019 with SQL Server 2017 Standard (ami-0cfa247caab543ea3) Navigate to EC2 Console and click \u0026quot;Launch Instance\u0026quot; Scroll down and select \u0026quot;Microsoft Windows Server 2019 with SQL Server 2017 Standard\u0026quot; Select M5.xlarge and click \u0026quot;Next: Configure Instance Details\u0026quot; For \u0026quot;Network\u0026quot; select your VPC and Subnet. For \u0026quot;Auto-Assign Public IP\u0026quot;, select Enable. This option will request a Public IP from Amazon so that your instance will be reachable from the internet. Please note that in production most of the time you don\u0026#39;t assign a public IP address to your SQL instance and make them accessible from the internet. The recommended approach is to setup Remote Desktop Gateway environment as jump box for internet access and then access SQL environment using private IPs. For this lab, we are assigning Public IP to access the SQL environment from our local computers. Domain join directory: chose the directory from Step1 and IAM role allowSSM. Network interface: 8. 8.Primary IP : 10.0.1.11 + Two secondary IP Addresses : 10.0.1.12 and 10.0.1.13  Click \u0026quot;Next: Add Storage\u0026quot; : Add one EBS 100GB GP2 for the data files Click \u0026quot;Next Add Tags\u0026quot;: Add Name: SQL-Node1 Click \u0026quot;Next Configure Security Groups\u0026quot; On Step 6, Click \u0026quot;Select an new security group\u0026quot; and open as following:  1. 1.  You will be prompted to select a key pair for authentication. If you have an existing key pair, you can select it from the list. You can also create a new key pair directly from the same screen. Click \u0026quot;Launch Instances\u0026quot; 2. 14.Go back to EC2 console and click on Launch more like this:  Launch the second instance with the same setting, just place it on Site2 with the IP 10.0.2.x In the wizard change the following: \u0026ndash; Configure instance tab: \u0026ndash; Domain join: manually select the domain \u0026ndash; Network interface \u0026ndash; Add Tags tab: change to Node2.   Launch.  Once the \u0026quot;Status Checks\u0026quot; shows \u0026quot;2\u0026frasl;2 checks passed\u0026quot; your instance will be ready to connect.\nNow you have launched a new Windows Server 2019 EC2 instance with a pre-installed SQL Server 2017 environment\n"
+},
+{
+	"uri": "http://example.org/prerequisites/create-managed-ad/",
+	"title": "Create Managed AD",
+	"tags": [],
+	"description": "",
+	"content": " Create Managed AD for the domain authentication In this task, you will create a Managed AD Directory.\n Navigate to Directory Services and click \u0026quot;Set up directory\u0026quot;  Type: Chose \u0026quot;AWS Managed Microsoft AD\u0026quot;\n And fill the details as following:\n  - For the VPC and Subnet, please use the VPC provided in your account - Review: This can take up to 20-45 minutes.\n"
+},
+{
+	"uri": "http://example.org/launch-ec2-with-mssql/test-ha/",
+	"title": "Test the HA:",
+	"tags": [],
+	"description": "",
+	"content": " Test the HA:  Fine tuning:\n Open dnsmgmt.msc\n Look for the endpoint record, do you see two?\n Solution:\n 1.Get-ClusterResource \u0026amp;lt;NetworkName\u0026amp;gt; | Set-ClusterParameter RegisterAllProvidersIP 0\n  "
+},
+{
+	"uri": "http://example.org/modedrnize/",
+	"title": "Migrate to Aurora",
+	"tags": [],
+	"description": "",
+	"content": "AWS SCT https://s3.amazonaws.com/publicsctdownload/Windows/aws-schema-conversion-tool-1.0.latest.zip\n"
+},
+{
+	"uri": "http://example.org/categories/",
+	"title": "Categories",
+	"tags": [],
+	"description": "",
+	"content": ""
+},
+{
+	"uri": "http://example.org/tags/",
+	"title": "Tags",
+	"tags": [],
+	"description": "",
+	"content": ""
+}]
