@@ -2,6 +2,9 @@
 
 Workshop for building mssql always on basic availability group on window and Linux server in AWS
 
+Website for this workshops is available at https://ec2mssqlworkshop.com
+
+
 ## Summary of the workshop
 
 In this workshop you will use Amazon FSx for managed shared file service, AWS Directory services for Identity management and Amazon EC2 to create a Well-Architected Microsoft SQL Server solution. 
