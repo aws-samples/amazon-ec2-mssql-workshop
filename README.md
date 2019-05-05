@@ -2,7 +2,7 @@
 
 Workshop for building mssql always on basic availability group on window and Linux server in AWS
 
-Website for this workshops is available at https://ec2mssqlworkshop.com/ 
+Website for this workshops is available at https://www.ec2mssqlworkshop.com/ 
 
 
 ## Summary of the workshop
