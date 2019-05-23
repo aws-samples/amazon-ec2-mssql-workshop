@@ -1,4 +1,4 @@
-baseURL = "http://example.org/"
+baseURL = "https://www.ec2mssqlworkshop.com/"
 languageCode = "en-us"
 title = "MS-SQL Server Workshop"
 theme = "hugo-theme-learn"

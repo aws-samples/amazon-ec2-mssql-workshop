@@ -9,4 +9,4 @@ disableToc: true
 
 - Dudu Twizer - Senior Solutions Architect at AWS ; Mail - [dudut@amazon.com](mailto:dudut@amazon.com) 
 - Shah Jugal - Partner Solutions Architect at AWS ; Mail - [jugashah@amazon.com](mailto:jugashah@amazon.com)
-
+- Sepehr Samiei -  Senior Solutions Architect at AWS ; Mail - [sepehrs@amazon.com] (mailto:sepehrs@amazon.com)
