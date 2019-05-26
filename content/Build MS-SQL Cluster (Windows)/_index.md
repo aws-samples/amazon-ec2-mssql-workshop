@@ -6,7 +6,7 @@ chapter = false
 pre = "<b>2. </b>"
 +++
 
-In this task, you will create 2 nodes with Microsoft Windows Server 2019 running SQL Server 2017 Standard (ami-0cfa247caab543ea3 _Ireland region) with AlwaysOn Availability Groups.
+In this task, you will create 2 nodes with Microsoft Windows Server 2019 running SQL Server 2017 Standard (ami-0cfa247caab543ea3 - Ireland region) with AlwaysOn Availability Groups.
 
 In this section, we’ll cover the following topics:
 {{% children showhidden="false" %}}
