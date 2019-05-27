@@ -22,7 +22,7 @@ Use the script provided in 1.4 or manually use the cli commands (on macOS) and r
 
 ~~~powershell
 ## Install Failover clustering role + management tools using the script
-.\runcommand.ps1 -instanceids i-09a4ee96bb0fef47a,i-0b9bfacd2996cd5b6 -commands "Install-WindowsFeature -Name Failover-Clustering -IncludeManagementTools" -region "eu-west-1" -profile workshop
+.\runcommand.ps1 -instanceids i-09a4ee96bb0fef47a,i-0b9bfacd2996cd5b6 -commands "Install-WindowsFeature -Name Failover-Clustering -IncludeManagementTools" -region "eu-west-1" -profile workshop -IsLinux $false
 ~~~
 
 **macOS**
@@ -93,11 +93,11 @@ Now, change the script parameters / manually use the cli commands to run the fol
 
     ~~~
     ## Install Active directory management tools
-    .\runcommand.ps1 -instanceids i-09a4ee96bb0fef47a,i-0b9bfacd2996cd5b6 -commands "ADD-WindowsFeature RSAT-AD-Tools" -region "eu-west-1" -profile workshop
+    .\runcommand.ps1 -instanceids i-09a4ee96bb0fef47a,i-0b9bfacd2996cd5b6 -commands "ADD-WindowsFeature RSAT-AD-Tools" -region "eu-west-1" -profile workshop -IsLinux $false
 
 
     ## Install DNS management tools
-    .\runcommand.ps1 -instanceids i-09a4ee96bb0fef47a,i-0b9bfacd2996cd5b6 -commands "ADD-WindowsFeature RSAT-DNS-Server" -region "eu-west-1" -profile workshop
+    .\runcommand.ps1 -instanceids i-09a4ee96bb0fef47a,i-0b9bfacd2996cd5b6 -commands "ADD-WindowsFeature RSAT-DNS-Server" -region "eu-west-1" -profile workshop -IsLinux $false
     ~~~
 
 {{% /expand%}}
@@ -129,8 +129,8 @@ Use SSM to open the local Windows Firewall to allow VPC Traffic (10.0.0.0/16)
 **windows**
 
 ~~~powershell
-.\runcommand.ps1 -instanceids i-09a4ee96bb0fef47a,i-0b9bfacd2996cd5b6 -commands "New-NetFirewallRule -DisplayName 'Allow local VPC' -Direction Inbound -LocalAddress 10.0.0.0/16 -LocalPort Any -Action Allow" -region "eu-west-1" -profile workshop
-.\runcommand.ps1 -instanceids i-09a4ee96bb0fef47a,i-0b9bfacd2996cd5b6 -commands "New-NetFirewallRule -DisplayName 'Allow local VPC' -Direction Outbound -LocalAddress 10.0.0.0/16 -LocalPort Any -Action Allow" -region "eu-west-1" -profile workshop
+.\runcommand.ps1 -instanceids i-09a4ee96bb0fef47a,i-0b9bfacd2996cd5b6 -commands "New-NetFirewallRule -DisplayName 'Allow local VPC' -Direction Inbound -LocalAddress 10.0.0.0/16 -LocalPort Any -Action Allow" -region "eu-west-1" -profile workshop -IsLinux $false
+.\runcommand.ps1 -instanceids i-09a4ee96bb0fef47a,i-0b9bfacd2996cd5b6 -commands "New-NetFirewallRule -DisplayName 'Allow local VPC' -Direction Outbound -LocalAddress 10.0.0.0/16 -LocalPort Any -Action Allow" -region "eu-west-1" -profile workshop -IsLinux $false
 ~~~
 
 **macOS**: 
@@ -184,10 +184,11 @@ And the command to map network share is: 'net use f: \\fs-08b8d7a080cd06987.doma
 Start session with [Session manager](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-sessions-start.html#start-sys-console) and run the following command: 
 
 ```shell
-echo net use f: \\fs-09e47e1aa03d3e93e.domain.name\share > "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\FSxMapping.bat"
+cd "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp"
+echo net use f: \\fs-09e47e1aa03d3e93e.domain.name\share > FSxMapping.bat
 ```
 
-**This script create a file named "FSxMapping.bat" in "c:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\" path, with one line: net use f: \\fsxmount.name.aws\share.**
+**This script creates a file named "FSxMapping.bat" in "c:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\" path, with one line: net use f: \\fsxmount.name.aws\share.**
 
 Output from Session Manager:
 

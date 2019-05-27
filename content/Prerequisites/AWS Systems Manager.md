@@ -65,7 +65,7 @@ param (
     [string]$region = "eu-west-1",
     [Parameter(Mandatory=$true)][string[]]$instanceids,
     [Parameter(Mandatory=$true)][string[]]$commands,
-	[bool]$IsLinux = $false
+	[bool]$IsLinux = $false,
     [string]$profile = "workshop"
  )
 
@@ -120,8 +120,17 @@ Write-Output "Done"
 In the next steps you will launch 2 instances, then use this script to send commands remotely and easly.
 {{% /notice %}}
 
-Example:
+Syntax:
 
 ```powershell
-.\runcommand.ps1 -instanceids instance_id_1,instance_id_2 -commands "Some commands" -region "eu-west-1" -profile "workshop"
+.\runcommand.ps1 -instanceids instance_id_1,instance_id_2 -commands "Some commands" -region "eu-west-1" -profile "workshop" -IsLinux $False
 ```
+
+Example:
+
+I run the following command from my local machine, to remotely execute the "ipconfig" command on the instance id i-0c47c2bbbc7864277. In the next step, you will launch instances, and use the script in the same way to run other commands.
+
+```powershell
+.\runcommand.ps1 -instanceids i-0c47c2bbbc7864277 -commands "ipconfig" -region eu-west-1 -profile "workshop" -IsLinux $false
+```
+![powershell](/img/Steps/runcommandscript.png?classes=border,shadow)

@@ -10,7 +10,7 @@ pre = "<b>4. </b>"
 
 In this step, you will install AWS Tools on your local machine.
 
-1. Run (with Admin shell):
+1. Run powershell (with Admin shell):
 
 ```powershell
 ## Install the module
@@ -20,6 +20,9 @@ Install-Module -Name AWSPowerShell
 import-module awspowershell
 
 ```
+
+See screenshot for how it should look:
+![powershell](/img/Steps/aws-powershell-tools.png?classes=border,shadow)
 
 {{% notice note %}}
 If the command above isn't working, it's because you are running old PowerShell version, in this case, you can manually download and install [AWS Tools for PowerShell](https://sdk-for-net.amazonwebservices.com/latest/AWSToolsAndSDKForNet.msi). For other troubleshooting, please see the [documentation](https://docs.aws.amazon.com/powershell/latest/userguide/pstools-getting-set-up-windows.html).
@@ -43,6 +46,9 @@ Set-AWSCredential -AccessKey AKIAIOSFODNN7EXAMPLE -SecretKey wJalrXUtnFEMI/K7MDE
 ## See the profile
 Get-AWSCredential -ListProfileDetail
 ```
+
+![awscredential](/img/Steps/awscredential.png?classes=border,shadow)
+
 {{% /expand%}}
 
 {{%expand "macOS" %}} 
@@ -76,7 +82,7 @@ Now, each CLI command with the flag **--profile workshop** will be to that accou
 ### Verify
 
 Verify your client with:
-```
+```bash
 ## Windows powershell
 Get-FSXFileSystem -ProfileName workshop -region eu-west-1
 
@@ -85,7 +91,7 @@ aws fsx describe-file-systems --profile workshop --region eu-west-1
 ```
 
 Good output:
-```
+```bash
 PS > Get-FSXFileSystem -ProfileName workshop -region eu-west-1
 
 CreationTime         : 4/7/2019 8:38:38 AM
