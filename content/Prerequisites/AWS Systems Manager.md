@@ -128,7 +128,7 @@ Syntax:
 
 Example:
 
-I run the following command from my local machine, to remotely execute the "ipconfig" command on the instance id i-0c47c2bbbc7864277. In the next step, you will launch instances, and use the script in the same way to run other commands.
+I ran the following command from my local machine to remotely execute the "ipconfig" command on the instance id i-0c47c2bbbc7864277. In the next step, you will launch instances, and use the script in the same way to run other commands.
 
 ```powershell
 .\runcommand.ps1 -instanceids i-0c47c2bbbc7864277 -commands "ipconfig" -region eu-west-1 -profile "workshop" -IsLinux $false
