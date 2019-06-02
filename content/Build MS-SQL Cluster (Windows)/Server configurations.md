@@ -185,7 +185,7 @@ Start session with [Session manager](https://docs.aws.amazon.com/systems-manager
 
 ```shell
 cd "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp"
-echo net use f: \\fs-09e47e1aa03d3e93e.domain.name\share > FSxMapping.bat
+write-output "net use f: \\fs-0a83c906269a48b73.domain.name\share" | out-file FSxMapping.bat -encoding ascii
 ```
 
 **This script creates a file named "FSxMapping.bat" in "c:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\" path, with one line: net use f: \\fsxmount.name.aws\share.**
@@ -193,9 +193,8 @@ echo net use f: \\fs-09e47e1aa03d3e93e.domain.name\share > FSxMapping.bat
 Output from Session Manager:
 
 ```powershell
-PS C:\Windows\system32> cd "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp"
-PS C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp> echo net use f: \\fs-09e47e1aa03d3e93e.domain.name\share > FSxMapping.bat
-PS C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp> dir
+PS C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp> write-output "net use f: \\fs-0a83c906269a48b73.domain.name\share" | out-file FSxMapping.bat -encoding ascii
+PS C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp> ls
 
 
     Directory: C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp
@@ -203,9 +202,10 @@ PS C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp> dir
 
 Mode                LastWriteTime         Length Name
 ----                -------------         ------ ----
--a----         4/8/2019   2:06 PM            110 FSxMapping.bat
+-a----         6/2/2019  11:57 AM             53 FSxMapping.bat
 
 
+PS C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp>
 
 ```
 {{% /expand%}}
