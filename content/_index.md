@@ -40,8 +40,9 @@ You are going to build the following architecture:
     - Amazon EC2 m5d and m5ad
     - Amazon EC2 r5d and r5ad
     - Amazon EC2 z1d
+    - Amazon EC2 i3en
     
-    This instances include Non-Volatile Memory Express (NVMe) SSD-based instance storage optimized for low latency, very high random I/O performance, and high sequential read throughput, and deliver high IOPS at a low cost. 
+    These instances include Non-Volatile Memory Express (NVMe) SSD-based instance storage optimized for low latency, very high random I/O performance, and high sequential read throughput, and deliver high IOPS at a low cost. 
     
     **In this workshop, we will use r5d.xlarge instance type, and the NVMe drive for host the TempDB**
 
@@ -61,6 +62,6 @@ You are going to build the following architecture:
 ## Terms and Definitions
 
 - Availability group - A container for a set of databases, availability databases, that fail over together
-- Primary replica - The availability replica that makes the primary databases available for read-write connections from clients and, also, sends transaction log records for each primary database to every secondary replica
+- Primary replica - The availability replica that makes the primary databases available for read-write connections from clients and, also, sends transaction log records for each primary database to every replica
 - Secondary replica - An availability replica that maintains a secondary copy of each availability database, and serves as a potential failover targets for the availability group. Optionally, a secondary replica can support read-only access to secondary databases can support creating backups on secondary databases
 - Availability group listener - **A server name** to which clients can connect in order to access a database in a primary or secondary replica of an Always On availability group. Availability group listeners direct incoming connections to the primary replica or to a read-only secondary replica
