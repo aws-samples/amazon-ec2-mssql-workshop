@@ -8,7 +8,7 @@ pre = "<b>5. </b>"
 
 ### Enable backup
 
-Create a new Database called "Database" (open SSMS and click create new database) and do a full backup for this database (right click Tasks->Backup) to the FSx drive.
+Create a new Database called "Database" (open SSMS and click create new database) and do a full backup for this database (right click Tasks->Backup).
 
 You don't need to do this step on the second node, since you will set this database to be part of the AG.
 

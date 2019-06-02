@@ -13,7 +13,9 @@ AWS Systems Manager is a collection of capabilities for configuring and managing
 
 ### Run-command
 
-See AWS Run-command: https://docs.aws.amazon.com/systems-manager/latest/userguide/execute-remote-commands.html 
+AWS Systems Manager Run Command lets you remotely and securely manage the configuration of your managed instances.
+
+See more about AWS Run-command: https://docs.aws.amazon.com/systems-manager/latest/userguide/execute-remote-commands.html 
 
 **Question:**
 How to use the Send-SSMCommand to send powershell script using SSM Agent that already installed (by default) on the instances?
@@ -29,11 +31,12 @@ The syntax for running single powershell command on instance is:
 ```powershell
 Send-SSMCommand -InstanceId $id -DocumentName AWS-RunPowerShellScript -Comment 'Comment' -Parameter @{commands = $command_or_commands} -region $region
 ```
-{{% /expand%}}
 
 {{% notice note %}}
 The DocumentName is set to AWS-RunPowerShellScript, to read more and see different type of documents see: https://docs.aws.amazon.com/systems-manager/latest/userguide/ssm-plugins.html
 {{% /notice %}}
+
+{{% /expand%}}
 
 **Question:**
 How to see the output of the command? 

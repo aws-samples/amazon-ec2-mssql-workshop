@@ -102,7 +102,7 @@ Now, change the script parameters / manually use the cli commands to run the fol
 
 {{% /expand%}}
 
-{{% notice warning %}}
+{{% notice note %}}
 **macOS Users**: 
 do not use the script, do it manually with the CLI commands aws ssm send-command
 {{% /notice %}}
@@ -118,7 +118,7 @@ do not use the script, do it manually with the CLI commands aws ssm send-command
 
 {{% /expand%}}
 
-
+---
 
 ### Task 2: 
 Use SSM to open the local Windows Firewall to allow VPC Traffic (10.0.0.0/16)
@@ -148,6 +148,8 @@ aws ssm get-command-invocation --command-id "d44b1034-3b8e-4db7-9ae2-8fe11138416
 
 {{% /expand%}}
 
+---
+
 ### Session Manager
 
 Session Manager is a new option for shell-level access. 
@@ -168,11 +170,13 @@ Main features:
 The SSM Agent running on the EC2 instances must be able to connect to Session Manager’s public endpoint. You can also set up a PrivateLink connection to allow instances running in private VPCs (without Internet access or a public IP address) to connect to Session Manager.
 
 
-Let's try it
+Let's try it (Task 3)
+
+---
 
 ### Task 3
 
-Create logon script to map the FSx share file (Get the FSx mount url from [FSx Console](https://eu-west-1.console.aws.amazon.com/fsx/home?region=eu-west-1#file-systems) click on "Attach").
+Use Session Manager to create a logon script that map the FSx share file (Get the FSx mount url from [FSx Console](https://eu-west-1.console.aws.amazon.com/fsx/home?region=eu-west-1#file-systems) click on "Attach").
 
 {{%expand "See hint" %}}
 Logon scripts are saved in "c:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\"
@@ -212,10 +216,12 @@ PS C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp>
 
 **Do the same on the second node**
 
--------------
+---
 
-### Add sysadmin role to domain user
+## Task 4
+Add sysadmin role to the domain user (Domain\Admin)
 
+{{%expand "See solution" %}}
 Connect with RDP client (Windows: build-in tool called mstsc, macOS [Microsoft Remote Desktop](https://itunes.apple.com/us/app/microsoft-remote-desktop-10/id1295203466?mt=12): ) to the instances, and authenticate with the **local Administrator,** (Get the Administrator password from EC2 console) 
 
 Username: **.\Administrator**
@@ -249,13 +255,11 @@ Get-EC2PasswordData -InstanceId i-09a4ee96bb0fef47a -Decrypt -PemFile C:\worksho
 
 {{% /expand%}}
 
-{{% notice tip %}}
 If you are using account from EventEngine - to get the Admin password of the Managed AD, go to the [CloudFormation page](https://eu-west-1.console.aws.amazon.com/cloudformation/home?region=eu-west-1) and select stack called **"module-mysql-workshop-managedADStack-25DM3D50SI6N"**, go to **Parameters** tab, and see the Password.
-{{% /notice %}}
 
 Return to the RDP session, and add the domain\admin to sysadmin role 
 
-{{%expand "See solution" %}}
+
 open SSMS from the start manu, and add the domain admin to sysadmin role:
 
 - Security, Right-click on Logins and New Login
@@ -288,25 +292,22 @@ Open the SQL Configuration Manager and change the user that runs the SQL Service
 ![mssql-configuration-user-domain](/img/Steps/mssql-configuration-user-domain.png?classes=border,shadow)
 {{% /expand%}}
 
-{{% notice warning %}}
+{{% notice note %}}
 Do the same on the second instance (add sysadmin role and change the service account)
 **And restart the servers**
 {{% /notice %}}
 
 Note: On producation enviroment, it's best practice to create a sql service account in AD with minimum permissions.
------------
 
-### Verify by connecting with domain\admin 
-After the servers rebooted, you now can connect with RDP and the user domain\admin that you created previously with Managed AD. 
+## Connect and verify
 
-{{% notice note %}}
-If you are using account from the workshop, you can see the admin password in the cloudformation page
-{{% /notice %}}
+Connect with domain\admin user (After the servers rebooted, you now can connect with RDP and the user domain\admin that you created previously with Managed AD.)
 
-**Make sure that you have permissions to launch SSMS with the domain user.**
+Note: If you are using account from the workshop, you can see the admin password in the cloudformation page
 
-Now you should see F: as the FSx folder, and the server is ready !
+**Verify your solution:**
 
-Open the Windows explorer and make sure you see all the drives as following:
-
+2. **Make sure that you have permissions to launch SSMS with the domain user.**
+3. Make sure you see F: drive as the FSx folder
+4. Open the Windows explorer and make sure you see all the drives as following:
 ![instance-result](/img/Steps/instance-result.png?classes=border,shadow)

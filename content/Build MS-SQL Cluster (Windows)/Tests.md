@@ -1,5 +1,5 @@
 +++
-title = "Tests"
+title = "Disk speed tests"
 date = 2019-03-21T20:40:20+02:00
 weight = 6
 chapter = false
