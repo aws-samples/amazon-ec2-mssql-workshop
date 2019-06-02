@@ -52,7 +52,7 @@ Get-SSMCommandInvocation -CommandId $runPSCommand.CommandId -Details $true -Inst
 ```
 {{% /expand%}}
 
-### Script
+### Powershell script to run command
 
 Use the following script, to automate the process of sending powershell commands and wait for their output.
 
@@ -129,7 +129,7 @@ Syntax:
 .\runcommand.ps1 -instanceids instance_id_1,instance_id_2 -commands "Some commands" -region "eu-west-1" -profile "workshop" -IsLinux $False
 ```
 
-Example:
+{{%expand "See example:" %}} 
 
 I ran the following command from my local machine to remotely execute the "ipconfig" command on the instance id i-0c47c2bbbc7864277. In the next step, you will launch instances, and use the script in the same way to run other commands.
 
@@ -137,3 +137,4 @@ I ran the following command from my local machine to remotely execute the "ipcon
 .\runcommand.ps1 -instanceids i-0c47c2bbbc7864277 -commands "ipconfig" -region eu-west-1 -profile "workshop" -IsLinux $false
 ```
 ![powershell](/img/Steps/runcommandscript.png?classes=border,shadow)
+{{% /expand%}}

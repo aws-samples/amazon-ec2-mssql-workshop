@@ -10,6 +10,8 @@ pre = "<b>4. </b>"
 
 In this step, you will install AWS Tools on your local machine.
 
+{{%expand "Windows OS" %}} 
+
 1. Run powershell (with Admin shell):
 
 ```powershell
@@ -28,6 +30,23 @@ See screenshot for how it should look:
 If the command above isn't working, it's because you are running old PowerShell version, in this case, you can manually download and install [AWS Tools for PowerShell](https://sdk-for-net.amazonwebservices.com/latest/AWSToolsAndSDKForNet.msi). For other troubleshooting, please see the [documentation](https://docs.aws.amazon.com/powershell/latest/userguide/pstools-getting-set-up-windows.html).
 {{% /notice %}}
 
+{{% /expand%}}
+
+{{%expand "macOS" %}} 
+
+### MacOS Users
+
+Most of the scripts and commands that are listed in this workshop are written in Powershell, so if you're using macOS, there are few options:
+
+- Option 1 - Install Powershell - Download and install **full powershell** for macOS from [Microsoft github](https://github.com/PowerShell/PowerShell), then launch the powershell.app from the MacOS launchpad and continue with the workshop. **Using Powershell for macOS you will be able to run commands that are listed in the windows sections (set-awscredential etc..)**
+
+- Option 2 - launch a windows 2019 bastion server, and continue the workshop from the bastion host. 
+
+- Option 3 - Use AWS CLI without PowerShell 
+
+Please note that It's not mandatory to use Powershell for macOS or Bastion host,the workshop commands can work on macOS as well via aws cli, but their syntax will be different 
+
+{{% /expand%}}
 
 ### Configure SSH Keys
 
@@ -51,12 +70,7 @@ Get-AWSCredential -ListProfileDetail
 
 {{% /expand%}}
 
-{{%expand "macOS" %}} 
-
-{{% notice note %}}
-If you're using macOS, and you want to use the script provided in this workshop, launch windows 2019 bastion server, and continue the workshop from the bastion host. But it's not mandatory, the commands can work on macOS as well (but without the script, you will need to it manually)
-{{% /notice %}}
-
+{{%expand "macOS (without Powershell)" %}} 
 
 - In macOS go to "~/.aws/credentials" 
 - In Windows go to "C:\Users\username\\.aws\credentials" 
@@ -74,9 +88,6 @@ region=eu-west-1
 Now, each CLI command with the flag **--profile workshop** will be to that account.
 
 {{% /expand%}}
-
-
-
 
 
 ### Verify
