@@ -12,6 +12,11 @@ The workshop also includes ways to achieve better performance from the storage l
 
 ![image](https://github.com/aws-samples/amazon-ec2-mssql-workshop/blob/master/content/img/Architecture/mssql-draw-workshop-Page-1.png)
 
+## Key resources
+
+1. Storage space script : [amazon-ec2-mssql-workshop/resources/code/storage_layer.ps1](https://github.com/aws-samples/amazon-ec2-mssql-workshop/blob/master/resources/code/storage_layer.ps1)
+2. Deck for this workshop : [deck/MSSQL Workshop.pdf](https://github.com/aws-samples/amazon-ec2-mssql-workshop/blob/master/deck/MSSQL%20Workshop.pdf)
+3. Cloudformation template for creating the stack (steps 1 -> 1.4) [resources/templates/mssql-stack-root.yaml](https://github.com/aws-samples/amazon-ec2-mssql-workshop/blob/master/resources/templates/mssql-stack-root.yaml)
 
 ## Building the Workshop site
 

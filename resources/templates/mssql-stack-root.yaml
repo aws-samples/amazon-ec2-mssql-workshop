@@ -14,7 +14,7 @@ Resources:
   vpcStack:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: https://github.com/aws-samples/amazon-ec2-mssql-workshop/resources/templates/vpc-3azs.yaml
+      TemplateURL: https://raw.githubusercontent.com/aws-samples/amazon-ec2-mssql-workshop/master/resources/templates/vpc-3azs.yaml
       Parameters:
         VPCName: 'MSSQL-WS-VPC'
         ClientIP: !Ref YourIP
@@ -22,7 +22,7 @@ Resources:
     Type: AWS::CloudFormation::Stack
     DependsOn: vpcStack
     Properties:
-      TemplateURL: https://github.com/aws-samples/amazon-ec2-mssql-workshop/resources/templates/managed-ad.yaml
+      TemplateURL: https://raw.githubusercontent.com/aws-samples/amazon-ec2-mssql-workshop/master/resources/templates/managed-ad.yaml
       Parameters:
         Name: !Ref DomainName
         Password: !Ref Password
@@ -34,7 +34,7 @@ Resources:
     Type: AWS::CloudFormation::Stack
     DependsOn: managedADStack
     Properties:
-      TemplateURL: https://github.com/aws-samples/amazon-ec2-mssql-workshop/resources/templates/fsx.yaml
+      TemplateURL: https://raw.githubusercontent.com/aws-samples/amazon-ec2-mssql-workshop/master/resources/templates/fsx.yaml
       Parameters:
         Name: 'MSSQL-FSx'
         VpcID: !GetAtt vpcStack.Outputs.VPC
@@ -44,6 +44,6 @@ Resources:
   iamStack:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: https://github.com/aws-samples/amazon-ec2-mssql-workshop/resources/templates/iam.yaml
+      TemplateURL: https://raw.githubusercontent.com/aws-samples/amazon-ec2-mssql-workshop/master/resources/templates/iam.yaml
       Parameters:
         Name: 'AllowEC2FC'
