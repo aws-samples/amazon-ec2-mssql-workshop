@@ -1,0 +1,31 @@
+#name - DNS-friendly name for the workshop. This will be used when generating the hosting URL (ie. https://my-first-workshop.workshops.aws/)
+name: ec2mssqlworkshop
+#title - The title of your workshop
+title: MS-SQL Server Workshop
+#description - A short description that will be displayed in search results
+description: Workshop for building mssql always on basic availability group on window and Linux server in AWS
+#categories - Refer to official AWS categories covered by the workshop content here
+categories: 
+  - Compute
+  - Windows on AWS
+#services - Refer to the official AWS service names covered by the workshop content here
+services: 
+   - Amazon EC2
+   - Amazon VPC
+   - AWS Directory service
+   - Amazon FSx for Windows File Server
+   - NVMe SSD Instance Store Volumes
+   - AWS Systems Manager
+#level - Approximate skill level needed for this workshop
+level: 400 
+#duration - Estimated duration in minutes
+duration: 180 
+#cost - Cost in USD. If the content is offered without cost, enter 0
+cost: 0 
+#author - Amazon alias of the primary author of the content
+author: dudut 
+#audience - Names of the personas associated with this workshop
+audience: 
+  - IT Professional
+  - DBAs
+  - System integrators

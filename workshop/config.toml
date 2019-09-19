@@ -1,0 +1,54 @@
+RelativeURLs=true
+CanonifyURLs=true
+languageCode = "en-US"
+defaultContentLanguage = "en"
+
+title = "MS-SQL Server Workshop"
+theme = "learn"
+metaDataFormat = "yaml"
+defaultContentLanguageInSubdir= true
+
+uglyurls = true
+sectionPagesMenu = "main"
+pygmentsCodeFences = true
+pygmentsStyle = "monokai"
+
+[params]
+  description = "MS-SQL Server Workshop"
+  author = "Jane Architect"
+  disableBreadcrumb = false
+  disableNextPrev = false
+  themeVariant = "aws"
+  disableSearch = false
+  disableAssetsBusting = true
+  disableLanguageSwitchingButton = false
+  disableShortcutsTitle = true
+  disableInlineCopyToClipBoard = true
+
+[outputs]
+home = [ "HTML", "RSS", "JSON"]
+
+[blackfriday]
+plainIDAnchors = true
+hrefTargetBlank = true
+
+[Languages]
+[Languages.en]
+title = "MS-SQL Server Workshop"
+weight = 1
+languageName = "English"
+
+[[menu.shortcuts]]
+name = "<i class='fas fa-bookmark'></i> Windows on AWS"
+url = "https://aws.amazon.com/windows/"
+weight = 10
+
+[[menu.shortcuts]]
+name = "<i class='fas fa-users'></i> Authors"
+url = "/authors.html"
+weight = 20
+
+[[menu.shortcuts]]
+name = "<i class='fas fa-envelope'></i> Feedback / Questions?"
+url = "mailto:mssql-workshop-feedback@amazon.com"
+weight = 30
