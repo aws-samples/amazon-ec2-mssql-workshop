@@ -28,7 +28,7 @@ The CloudFormation template contains:
 - Amazon FSx (500GB Storage) connected to the Directory
 
 CloudFormation Link: 
-https://github.com/aws-samples/amazon-ec2-mssql-workshop/resources/templates/mssql-stack-root.yaml
+https://github.com/aws-samples/amazon-ec2-mssql-workshop/blob/master/resources/templates/mssql-stack-root.yaml
 
 ### Manually 
 
