@@ -6,19 +6,19 @@ chapter = false
 pre = "<b>2. </b>"
 +++
 
-## Configure the instances remotely SSM
+## Configure the instances remotely using AWS Systems Manager (SSM)
 
-In this step you will add permission the account domain user to manage your db and open firewall rules remotely using SSM
+In this step you will add permissions for the account domain user to manage your db and open the Windows firewall rules remotely using SSM
 
 {{% notice warning %}}
 Verify that the instances are ready before continue (see progress via the EC2 Console)
 {{% /notice %}}
 
-### Install Failover cluster role remotely
+### Install Failover Cluster role remotely
 
-Use the script provided in 1.4 or manually use the cli commands (on macOS) and run the following command to install the failover cluster role
- 
- **windows**
+Use the script provided in 1.4 or manually execute the cli commands (on macOS) and run the following command to install the failover cluster role
+
+ **Windows**
 
 ~~~powershell
 ## Install Failover clustering role + management tools using the script
@@ -34,7 +34,7 @@ aws ssm send-command --instance-ids "i-0e51d2fc1693d184b" --document-name "AWS-R
 aws ssm get-command-invocation --command-id "d44b1034-3b8e-4db7-9ae2-8fe11138416c" --instance-id "i-0e51d2fc1693d184b" --region eu-west-1 --profile workshop
 ~~~
 
-It will take up to 2-4 minutes, 
+It will take up to 2-4 minutes,
 
 {{%expand "See example of a good output:" %}}
     ~~~
@@ -103,7 +103,7 @@ Now, change the script parameters / manually use the cli commands to run the fol
 {{% /expand%}}
 
 {{% notice note %}}
-**macOS Users**: 
+**macOS Users**:
 do not use the script, do it manually with the CLI commands aws ssm send-command
 {{% /notice %}}
 
@@ -120,7 +120,7 @@ do not use the script, do it manually with the CLI commands aws ssm send-command
 
 ---
 
-### Task 2: 
+### Task 2:
 Use SSM to open the local Windows Firewall to allow VPC Traffic (10.0.0.0/16)
 
 {{%expand "See solution" %}}
@@ -133,7 +133,7 @@ Use SSM to open the local Windows Firewall to allow VPC Traffic (10.0.0.0/16)
 .\runcommand.ps1 -instanceids i-09a4ee96bb0fef47a,i-0b9bfacd2996cd5b6 -commands "New-NetFirewallRule -DisplayName 'Allow local VPC' -Direction Outbound -LocalAddress 10.0.0.0/16 -LocalPort Any -Action Allow" -region "eu-west-1" -profile workshop -IsLinux $false
 ~~~
 
-**macOS**: 
+**macOS**:
 do not use the script, do it manually with the following command:
 
 ~~~bash
@@ -152,10 +152,10 @@ aws ssm get-command-invocation --command-id "d44b1034-3b8e-4db7-9ae2-8fe11138416
 
 ### Session Manager
 
-Session Manager is a new option for shell-level access. 
+Session Manager is a new option for shell-level access.
 The Session Manager makes the AWS Systems Manager even more powerful. You can use a new browser-based interactive shell and a command-line interface (CLI) to manage your Windows and Linux instances.
 
-Main features: 
+Main features:
 
 - Secure Access – You don’t have to manually set up user accounts, passwords, or SSH keys on the instances and you don’t have to open up any inbound ports. Session Manager communicates with the instances via the SSM Agent across an encrypted tunnel that originates on the instance, and does not require a bastion host.
 
@@ -185,7 +185,7 @@ And the command to map network share is: 'net use f: \\fs-08b8d7a080cd06987.doma
 
 {{%expand "See solution" %}}
 
-Start session with [Session manager](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-sessions-start.html#start-sys-console) and run the following command: 
+Start session with [Session manager](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-sessions-start.html#start-sys-console) and run the following command:
 
 ```shell
 cd "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp"
@@ -222,7 +222,7 @@ PS C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp>
 Add sysadmin role to the domain user (Domain\Admin)
 
 {{%expand "See solution" %}}
-Connect with RDP client (Windows: build-in tool called mstsc, macOS [Microsoft Remote Desktop](https://itunes.apple.com/us/app/microsoft-remote-desktop-10/id1295203466?mt=12): ) to the instances, and authenticate with the **local Administrator,** (Get the Administrator password from EC2 console) 
+Connect with RDP client (Windows: build-in tool called mstsc, macOS [Microsoft Remote Desktop](https://itunes.apple.com/us/app/microsoft-remote-desktop-10/id1295203466?mt=12): ) to the instances, and authenticate with the **local Administrator,** (Get the Administrator password from EC2 console)
 
 Username: **.\Administrator**
 
@@ -235,19 +235,19 @@ Get the local administrator password with CLI command
 
 Use the CLI to get the Administrator password
 
-- **macOS:** 
+- **macOS:**
 
 ```
 aws ec2 get-password-data --instance-id i-1234567890abcdef0 --priv-launch-key ~\MyKeyPair.pem --profile workshop
 ```
 
-- **Windows:** 
+- **Windows:**
 
 ```
 Get-EC2PasswordData -InstanceId i-1234567890abcdef0 -Decrypt -PemFile C:\Keys\MyKeyPair.pem -ProfileName workshop -Region eu-west-1
 ```
 
-- (Example) : 
+- (Example) :
 
 ```
 Get-EC2PasswordData -InstanceId i-09a4ee96bb0fef47a -Decrypt -PemFile C:\workshop.pem -ProfileName workshop -Region eu-west-1
@@ -257,13 +257,13 @@ Get-EC2PasswordData -InstanceId i-09a4ee96bb0fef47a -Decrypt -PemFile C:\worksho
 
 If you are using account from EventEngine - to get the Admin password of the Managed AD, go to the [CloudFormation page](https://eu-west-1.console.aws.amazon.com/cloudformation/home?region=eu-west-1) and select stack called **"module-mysql-workshop-managedADStack-25DM3D50SI6N"**, go to **Parameters** tab, and see the Password.
 
-Return to the RDP session, and add the domain\admin to sysadmin role 
+Return to the RDP session, and add the domain\admin to sysadmin role
 
 
 open SSMS from the start manu, and add the domain admin to sysadmin role:
 
 - Security, Right-click on Logins and New Login
-- Click on "Search" 
+- Click on "Search"
 - Click on "Locations"
 - Authenticate with domain admin : user: **"domain\admin"** password: (from the cloudformation template)
 - Click "Entire Directory" and OK

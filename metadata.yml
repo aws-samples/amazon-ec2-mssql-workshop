@@ -3,13 +3,13 @@ name: ec2mssqlworkshop
 #title - The title of your workshop
 title: MS-SQL Server Workshop
 #description - A short description that will be displayed in search results
-description: Workshop for building mssql always on basic availability group on window and Linux server in AWS
+description: Workshop for building a MS-SQL Always On Basic Availability Group on Windows and Linux server in AWS
 #categories - Refer to official AWS categories covered by the workshop content here
-categories: 
+categories:
   - Compute
   - Windows on AWS
 #services - Refer to the official AWS service names covered by the workshop content here
-services: 
+services:
    - Amazon EC2
    - Amazon VPC
    - AWS Directory service
@@ -17,15 +17,15 @@ services:
    - NVMe SSD Instance Store Volumes
    - AWS Systems Manager
 #level - Approximate skill level needed for this workshop
-level: 400 
+level: 400
 #duration - Estimated duration in minutes
-duration: 180 
+duration: 180
 #cost - Cost in USD. If the content is offered without cost, enter 0
-cost: 0 
+cost: 0
 #author - Amazon alias of the primary author of the content
-author: dudut 
+author: dudut
 #audience - Names of the personas associated with this workshop
-audience: 
+audience:
   - IT Professional
   - DBAs
-  - System integrators
+  - System Integrators
