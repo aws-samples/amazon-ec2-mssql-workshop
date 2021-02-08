@@ -6,6 +6,6 @@ chapter = false
 pre = "<b>1. </b>"
 +++
 
-Before we can start build, let's make sure you know the terms and definitions, and what you going to build (and why)
+Before we can start the build, let's make sure you know the terms and definitions, and what you going to build (and why)
 
 {{% children showhidden="false" %}}

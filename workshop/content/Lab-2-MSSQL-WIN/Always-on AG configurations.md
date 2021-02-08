@@ -6,17 +6,17 @@ chapter = false
 pre = "<b>5. </b>"
 +++
 
-### Enable backup
+### Enable Backup
 
-Create a new Database called "Database" (open SSMS and click create new database) and do a full backup for this database (right click Tasks->Backup).
+Create a new Database called "Database" (open SQL Server Management Studio (SSMS) and click create new database) and do a full backup for this database (right click Tasks->Backup).
 
 You don't need to do this step on the second node, since you will set this database to be part of the AG.
 
 In other cases, it's best practice to have backup even if you have HA solution.
 
-### Enable Always-on
+### Enable Always On
 
-1. Open SQL Server Configuration Manager and enable the Always on checkbox
+1. Open SQL Server Configuration Manager (SSCM) and enable the Always on checkbox
 ![stormtroopocat](/images/screenshots/image018.png?classes=border,shadow)
 
 ### Create Availability Group
@@ -38,7 +38,7 @@ Open SSMS and create the first Availability group
 The listener name is the endpoint to which clients \ application are connecting to
 {{% /notice %}}
 
-1. For Data Sync use the FSx or Shared folder of one of the instances: 
+1. For Data Sync use the FSx or Shared folder of one of the instances:
 ![stormtroopocat](/images/screenshots/Steps/ao-step-datarep.png?classes=border,shadow)
 {{% /expand%}}
 

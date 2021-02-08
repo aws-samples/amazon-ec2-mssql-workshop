@@ -17,10 +17,10 @@ Storage Spaces (not to be confused with Storage Spaces Direct) has been a part o
 
 To manage Windows Storage Spaces, open Server Manager and click on the File and Storage Services tab, and then click on Storage Pools.
 
-The storage spaces already created with the bootstrap script, make sure you see the D: drive and E: drive as the local NVMe.
+The Storage Space is already created with the bootstrap script, make sure you see the D: drive and E: drive as the local NVMe.
 
-Note: 
-The Disk Management Console is Windows Server's legacy tool for storage management. The Disk Management Console, which you can access by entering the Diskmgmt.msc command at the Run prompt, only shows physical storage.
+Note:
+The Disk Management Console is Windows Server's legacy tool for Storage Management. The Disk Management Console, which you can access by entering the Diskmgmt.msc command at the Run prompt, only shows physical storage.
 
 ## AWS Hardware layer
 
@@ -33,13 +33,13 @@ The following link describe the performance for the EBS Volumes:
 https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
 
 {{% notice tip %}}
-Burst capability: since  we use volumes below 1 TB, each ebs can  burst to 3K IOPS up to 30 mins a day. You can get a peak at 12K IOPS 30 mins a day (which can be usefull when you have ETL job that run only about 1 hour a day for example, or a olap cube transformation)
+Burst capability: since we use volumes below 1 TB, each ebs can burst to 3K IOPS up to 30 mins a day. You can get a peak at 12K IOPS for 30 mins a day (which can be useful when you have ETL job that only runs for about 1 hour a day for example, or an olap cube transformation)
 {{% /notice %}}
 
 
 ## Temp DB configuration
 
-1. Connect to the instances, with admin user (of the managed AD)
+1. Connect to the instances, with admin user (of the AWS Managed AD)
 
 1. Open SSMS , Click on new query:
 
