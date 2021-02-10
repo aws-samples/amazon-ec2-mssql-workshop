@@ -10,7 +10,7 @@ pre = "<b>1. </b>"
 
 - Open [AWS Console from the EventEngine page](https://dashboard.eventengine.run/dashboard) and navigate to EC2 Console and click "Launch Instance"
 - Scroll down and select "Microsoft Windows Server 2019 with SQL Server 2017 Standard"
-- Select **r5d.xlarge** and click "Next: Configure Instance Details"
+- Select **c5ad.xlarge** and click "Next: Configure Instance Details"
 - For "Network" select VPC **MSSQL-WS-VPC** and Subnet: **Site-1**.
 - For "Auto-Assign Public IP", select Enable.
 
@@ -19,13 +19,13 @@ This option will request a Public IP from Amazon so that your instance will be r
 {{% /notice %}}
 
 - Domain join directory: choose the directory **"domain.name"**
-- IAM role: **TeamRoleInstanceProfile**
+- IAM role: **AllowEC2FC**
 + Network interface:
  - Primary IP : 10.0.1.11 +
  - Two secondary IP Addresses : 10.0.1.12 and 10.0.1.13
 ![Launch](/images/screenshots/Steps/ec2-launch-instance-settings.png?classes=border,shadow)
 
-- Open "Advanced Details" and insert the following script as bootstap
+- Open "Advanced Details" and insert the following script as bootstrap
 This script will handle the storage layer, the temp db on the NVMe local drive, and will also take care in case of shutdown (via startup script)
 
 ```powershell
@@ -86,8 +86,9 @@ Register-ScheduledTask -Action $action -Trigger $trigger -TaskName "Rebuild Temp
 
 - Click "Next Configure Security Groups"
 
-- Select **module-mysql-workshop-vpcStack-1N9ODMBJ5M930-SecurityGroup-1WJCZ85L3NS0U**
-- Click Launch Instance
+- Select **module-mysql-workshop-vpcStack-1N9ODMBJ5M930-SecurityGroup-1WJCZ85L3NS0U** (or similar name)
+- Click "Review and Launch"
+- Click "Launch"
 - You will be prompted to select a key pair for authentication. **Create new one! and download it** and click "Launch Instances"
 
 - Go back to EC2 console and click on Launch more like this:
@@ -113,7 +114,7 @@ Register-ScheduledTask -Action $action -Trigger $trigger -TaskName "Rebuild Temp
 
 **Click "Review and Launch"**
 
-Wait for the "Status Checks" to show "2/2 checks passed" and your instance will be ready to connect.
+Wait for the **"Status Checks"** to show **"2/2 checks passed"** and your instance will be ready to connect.
 
 
 

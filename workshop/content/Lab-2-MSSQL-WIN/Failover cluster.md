@@ -10,9 +10,9 @@ pre = "<b>4. </b>"
 
 ### Create the cluster
 
-- Connect to the first node with RDP
+- Connect to the first SQL node through RDP
 
-Open the failover cluster manager and click on "create new cluster"
+Open the Failover Cluster Manager and click on "create new cluster"
 
 - Create Cluster and add the two nodes by their IP
 ![stormtroopocat](/images/screenshots/image014.png?classes=border,shadow)
@@ -23,7 +23,7 @@ Open the failover cluster manager and click on "create new cluster"
 
 ### Configure the cluster network
 
-- Open the FailOver Cluster Manager and fix the network settings:
+- Open the Failover Cluster Manager and fix the network settings:
     - In the "Cluster Core Resources" Tab, select the cluster object, and click right click and properties
     ![stormtroopocat](/images/screenshots/image015.png?classes=border,shadow)
     - Edit the first ip (To 10.0.1.12):
@@ -36,7 +36,7 @@ You should see the status now "Online"
 
 ### Quorum Witness
 
-Set the FSx mount url (get it from Amazon FSx console) to set the Quorum Witness there. Since FSx is located in the third AZ, it will help the cluster decide in case of a network failure or unlikly event such an outage of AZ to set the primary node of the cluster.
+Set the FSx mount url (get it from Amazon FSx console) to set the Quorum Witness there. Since FSx is located in the third AZ, it will help the cluster decide in case of a network failure or unlikely event such as an outage of an AZ, to set the primary node of the cluster.
 
 - In Failover Cluster Manager, With the cluster selected, under Actions, select More Actions (in the left navigation pane), and then select Configure Cluster Quorum Settings. The "Configure Cluster Quorum Wizard" appears. Select Next.
 - Select "select the quorum witness""
@@ -48,12 +48,12 @@ Set the FSx mount url (get it from Amazon FSx console) to set the Quorum Witness
 
 ## Add the cluster object permissions to create Availability group object
 
-In the next step, we will create the first Availability Group. The Cluster object will need permissions to create new computer account for the Availability group, in order to grant those permissions do the following:
+In the next step, we will create the first Availability Group. The Cluster object will need permissions to create new computer account for the Availability Group, in order to grant those permissions do the following:
 
-- Open dsa.msc and change the view to Advanced (View->Advanced)
+- Open/Run **dsa.msc** and change the view to Advanced (View->Advanced)
 - Go to the $Domainname OU -> And right click on Computers OU and select "Properties" (on the Computers OU)-> Go to the Security tab -> And **click add**
 - **Find the object of the cluster ("yourname-cluster")**, and search for the following permissions:
- - "Create Computer objects"
+ - "Create Computer Objects"
  - "Read all properties"
 
 ![stormtroopocat](/images/screenshots/image020.png?classes=border,shadow)
