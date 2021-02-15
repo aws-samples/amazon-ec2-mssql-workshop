@@ -81,7 +81,7 @@ If using the Event Engine, you can get the AccessKey, SecretKey, and SessionToke
 
 The main difference between the two, the SessionToken parameter, which is only mandatory when using IAM Roles, but when using IAM Users, you only need to configure AWS Secret Key and Access key ID.
 
-{{%expand "SSH Keys using Event Engine" %}}
+{{%expand "Option 1: IAM Keys using Event Engine" %}}
 
 Get the AccessKey, SecretKey, and SessionToken for the workshop profile.
 To do so, open https://dashboard.eventengine.run/dashboard and navigate to "Credentials / CLI Snippets."
@@ -124,7 +124,7 @@ Each CLI command with the flag **--profile workshop** will be to that account.
 
 {{% /expand%}}
 
-{{%expand "SSH Keys for Personal/Work account" %}}
+{{%expand "Option 2: IAM Keys for Personal/Work account" %}}
 
 
 1. Open the IAM console at https://console.aws.amazon.com/iam/.
