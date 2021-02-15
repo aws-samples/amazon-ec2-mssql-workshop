@@ -20,9 +20,11 @@ This option will request a Public IP from Amazon so that your instance will be r
 
 - Domain join directory: choose the directory **"domain.name"**
 - IAM role: **AllowEC2FC**
-+ Network interface:
- - Primary IP : 10.0.1.11 +
- - Two secondary IP Addresses : 10.0.1.12 and 10.0.1.13
+- Network interface:
+   - Primary IP : 10.0.1.11
+   - Two secondary IP Addresses : 10.0.1.12 and 10.0.1.13
+
+Here is a screenshot:
 ![Launch](/images/screenshots/Steps/ec2-launch-instance-settings.png?classes=border,shadow)
 
 - Open "Advanced Details" and insert the following script as bootstrap
@@ -78,15 +80,13 @@ Register-ScheduledTask -Action $action -Trigger $trigger -TaskName "Rebuild Temp
 
 ```
 
-- Click "Next: Add Storage" : And add 4 EBS 500GB (2TB) GP2 for the data files
+- Click "Next: Add Storage" : And add 4 EBS 500GB (2TB) GP2 for the data files. (Do not remove the instance store)
 
 ![ebs-settings](/images/screenshots/Steps/EBS-settings.png?classes=border,shadow)
 
 - Click "Next Add Tags": Add "Name": SQL-Node1
-
 - Click "Next Configure Security Groups"
-
-- Select **module-mysql-workshop-vpcStack-1N9ODMBJ5M930-SecurityGroup-1WJCZ85L3NS0U** (or similar name)
+- Select module-mysql-workshop-vpcStack-1N9ODMBJ5M930-SecurityGroup-1WJCZ85L3NS0U (or similar name as long as the words SecurityGroup is in it)
 - Click "Review and Launch"
 - Click "Launch"
 - You will be prompted to select a key pair for authentication. **Create new one! and download it** and click "Launch Instances"

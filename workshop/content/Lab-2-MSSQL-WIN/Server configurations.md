@@ -16,7 +16,7 @@ Verify that the EC2 instances are ready before continuing (see progress via the 
 
 ### Install Failover Cluster role remotely
 
-Use the script provided in step 1.4 or manually execute the cli commands (on macOS) and run the following command to install the Failover Cluster Role
+Use the script provided in LAB 1 (Prerequisites), Step 4 or manually execute the cli commands (on macOS) and run the following command to install the Failover Cluster Role. Be sure to modify the EC2 Instance IDs into your own (see EC2 Console).
 
  **Windows**
 
@@ -111,9 +111,9 @@ do not use the script, do it manually with the CLI commands **aws ssm send-comma
 
     ~~~bash
 
-    aws ssm send-command --instance-ids "i-0e51d2fc1693d184b" --document-name "AWS-RunPowerShellScript" --comment 'Install AD RSAT' --parameters "commands='ADD-WindowsFeature RSAT-AD-Tools'" --region eu-west-1 --profile workshop
+    aws ssm send-command --instance-ids "i-0b9bfacd29example" --document-name "AWS-RunPowerShellScript" --comment 'Install AD RSAT' --parameters "commands='ADD-WindowsFeature RSAT-AD-Tools'" --region eu-west-1 --profile workshop
 
-    aws ssm send-command --instance-ids "i-0e51d2fc1693d184b" --document-name "AWS-RunPowerShellScript" --comment 'Install DNS RSAT' --parameters "commands='ADD-WindowsFeature RSAT-DNS-Server'" --region eu-west-1 --profile workshop
+    aws ssm send-command --instance-ids "i-0b9bfacd29example" --document-name "AWS-RunPowerShellScript" --comment 'Install DNS RSAT' --parameters "commands='ADD-WindowsFeature RSAT-DNS-Server'" --region eu-west-1 --profile workshop
     ~~~
 
 {{% /expand%}}
@@ -129,8 +129,8 @@ Use SSM to open the local Windows Firewall to allow VPC Traffic (10.0.0.0/16)
 **windows**
 
 ~~~powershell
-.\runcommand.ps1 -instanceids i-09a4ee96bb0fef47a,i-0b9bfacd2996cd5b6 -commands "New-NetFirewallRule -DisplayName 'Allow local VPC' -Direction Inbound -LocalAddress 10.0.0.0/16 -LocalPort Any -Action Allow" -region "eu-west-1" -profile workshop -IsLinux $false
-.\runcommand.ps1 -instanceids i-09a4ee96bb0fef47a,i-0b9bfacd2996cd5b6 -commands "New-NetFirewallRule -DisplayName 'Allow local VPC' -Direction Outbound -LocalAddress 10.0.0.0/16 -LocalPort Any -Action Allow" -region "eu-west-1" -profile workshop -IsLinux $false
+.\runcommand.ps1 -instanceids i-0b9bfacd28example,i-0b9bfacd29example -commands "New-NetFirewallRule -DisplayName 'Allow local VPC' -Direction Inbound -LocalAddress 10.0.0.0/16 -LocalPort Any -Action Allow" -region "eu-west-1" -profile workshop -IsLinux $false
+.\runcommand.ps1 -instanceids i-0b9bfacd28example,i-0b9bfacd29example -commands "New-NetFirewallRule -DisplayName 'Allow local VPC' -Direction Outbound -LocalAddress 10.0.0.0/16 -LocalPort Any -Action Allow" -region "eu-west-1" -profile workshop -IsLinux $false
 ~~~
 
 **macOS**:
