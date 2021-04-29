@@ -2,12 +2,11 @@ import boto3
 import argparse
 import json
 
-parser = argparse.ArgumentParser(description='Helper tool to generate Amazon CloudWatch Dashboard with all EBS volumes attached to the instances and their important metrics')
-parser.add_argument("--region", type=str, help="Set the region where the instances are running. Default is us-east-1", nargs='?', default='us-east-1')
-parser.add_argument("--profile", type=str, help="Local AWS profile to use, leave empty for default profile", nargs='?', default="")
-parser.add_argument("--InstanceList", default=[], help="<Required> Add here all the instance types that you want to monitor (i.e: 'i-example i-example2''", nargs='+', required=True)
-parser.add_argument("--DashboardName" , type=str ,help="Set the cloudwatch dashboard name you want to create using this CLI. Please note that in case you specify a name that already exists, it will override the dashboard.", default='EC2-EBS-Monitor', nargs='?')
-
+parser = argparse.ArgumentParser(description='This script creates an annotated Amazon CloudWatch Dashboard for the specified EC2 Instances and their EBS volumes.')
+parser.add_argument("--region", type=str, help="Specify AWS Region within which instances are running. Default is us-east-1", nargs='?', default='us-east-1')
+parser.add_argument("--profile", type=str, help="Specify local AWS profile to use. Leave empty for default profile", nargs='?', default="")
+parser.add_argument("--InstanceList", default=[], help="<Required> Specify instance-id(s) to monitor (e.g. 'i-example i-example2''", nargs='+', required=True)
+parser.add_argument("--DashboardName" , type=str ,help="Specify CloudWatch Dashboard name to create or update. If dashboard exists, it will be overwritten. Default is 'EC2-EBS-Monitor'", default='EC2-EBS-Monitor', nargs='?')
 args = parser.parse_args()
 
 # Vars
