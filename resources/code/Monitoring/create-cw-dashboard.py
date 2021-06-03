@@ -348,7 +348,12 @@ def create_cw_dashboard(ec2_list, networklimit):
 
     dashboard = {"periodOverride": "inherit", "widgets": widgets['widgets']}
     result = cw.put_dashboard(DashboardName=CloudWatch_DashboardName,DashboardBody=json.dumps(dashboard))
-    print(result)
+    if 'ResponseMetadata' in result:
+        if 'HTTPStatusCode' in result['ResponseMetadata']:
+            if result['ResponseMetadata']['HTTPStatusCode'] == 200:
+                print(f'Dashboard successfully created. \nLink to the dashboard: https://console.aws.amazon.com/cloudwatch/home?region={region}#dashboards:name={CloudWatch_DashboardName}')
+    else:
+        print("error with request")
 
 def get_instance_type_from_ids(instances):
     list_of_instance_types = []
