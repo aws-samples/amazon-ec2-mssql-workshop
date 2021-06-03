@@ -5,3 +5,4 @@ packaged.yaml
 resources/_gen
 .DS_Store
 workshop/package-lock.json
+.vscode

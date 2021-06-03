@@ -1,13 +1,18 @@
 import boto3
 import argparse
 import json
+import sys
 
 parser = argparse.ArgumentParser(description='This script creates an annotated Amazon CloudWatch Dashboard for the specified EC2 Instances and their EBS volumes.')
 parser.add_argument("--region", type=str, help="Specify AWS Region within which instances are running. Default is us-east-1", nargs='?', default='us-east-1')
 parser.add_argument("--profile", type=str, help="Specify local AWS profile to use. Leave empty for default profile", nargs='?', default="")
 parser.add_argument("--InstanceList", default=[], help="<Required> Specify instance-id(s) to monitor (e.g. 'i-example i-example2''", nargs='+', required=True)
 parser.add_argument("--DashboardName" , type=str ,help="Specify CloudWatch Dashboard name to create or update. If dashboard exists, it will be overwritten. Default is 'EC2-EBS-Monitor'", default='EC2-EBS-Monitor', nargs='?')
-args = parser.parse_args()
+try:
+    args = parser.parse_args()
+except SystemExit:
+    print("Missing arguments")
+    sys.exit()
 
 # Vars
 region = args.region
@@ -48,10 +53,14 @@ def get_speed(instances):
 def get_instance_name(instance_id):
     ec2instance = ec2.Instance(instance_id)
     instancename = ' '
-    for tags in ec2instance.tags:
-        if tags["Key"] == 'Name':
-            instancename = tags["Value"]
-    return instancename
+    if (ec2instance.tags is not None):
+        for tags in ec2instance.tags:
+            if tags["Key"] == 'Name':
+                instancename = tags["Value"]
+        return instancename
+    else:
+        return instancename
+
 
 def create_cw_dashboard(ec2_list, networklimit):
     widgets = {"widgets": []}
@@ -288,7 +297,10 @@ def create_cw_dashboard(ec2_list, networklimit):
             iopsValue = 0
 
             if bool(flagForIOPS):
-                iopsValue = volume_speed.iops
+                if(volume_speed.iops is not None):
+                    iopsValue = volume_speed.iops
+                else:
+                    iopsValue = 0
             else:
                 iopsValue = 0
 
