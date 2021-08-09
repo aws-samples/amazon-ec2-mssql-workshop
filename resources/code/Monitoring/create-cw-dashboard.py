@@ -103,6 +103,9 @@ def create_cw_dashboard(ec2_list, networklimit):
         for word in ec2_NetworkInfo['NetworkPerformance'].split():
             if word.isdigit():
                 numbers.append(int(word))
+        
+        if(len(numbers) == 0):
+            numbers.append(0)
 
         # EC2 Metrics 
         new_widget = {
