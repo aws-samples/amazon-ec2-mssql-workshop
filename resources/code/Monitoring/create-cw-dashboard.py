@@ -105,7 +105,7 @@ def create_cw_dashboard(ec2_list, networklimit):
                 numbers.append(int(word))
         
         if(len(numbers) == 0):
-            numbers.append(0)
+            numbers.append(5)
 
         # EC2 Metrics 
         new_widget = {
